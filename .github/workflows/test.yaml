@@ -22,7 +22,10 @@ jobs:
         run: python -c "import sys; print(sys.version)"
       
       - name: Install Dependencies
-        run: uv sync
+
+        run: 
+            pip install uv
+            uv sync
 
       - name: Checking Code Quality
         run: pylint main.py --fail-under=5
