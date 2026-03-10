@@ -21,7 +21,15 @@ import duckdb
 from src.validation.check import (
     check_name_formatting,
     check_missing_values,
+<<<<<<< HEAD
     check_data_leakage,
+=======
+<<<<<<< HEAD
+    check_data_leakage,
+=======
+    check_data_leakage
+>>>>>>> 8bd36a45ab1905aacd0c38f1e862bb2004d0541c
+>>>>>>> 171a9ac41e160413ce1328b935a9e6835c429918
 )
 
 
@@ -33,7 +41,18 @@ logging.basicConfig(
     style="{",
     datefmt="%Y-%m-%d %H:%M",
     level=logging.DEBUG,
+<<<<<<< HEAD
     handlers=[logging.FileHandler("recording.log"), logging.StreamHandler()],
+=======
+<<<<<<< HEAD
+    handlers=[logging.FileHandler("recording.log"), logging.StreamHandler()],
+=======
+    handlers=[
+        logging.FileHandler("recording.log"),
+        logging.StreamHandler()
+    ]
+>>>>>>> 8bd36a45ab1905aacd0c38f1e862bb2004d0541c
+>>>>>>> 171a9ac41e160413ce1328b935a9e6835c429918
 )
 
 
@@ -63,11 +82,23 @@ logging.debug(f"Valeur de l'argument n_trees: {n_trees}")
 
 # QUALITY DIAGNOSTICS  ---------------------------------------
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 171a9ac41e160413ce1328b935a9e6835c429918
 logging.debug(f"\n{80 * '-'}\nStarting data validation step\n{80 * '-'}")
 
 query_definition = (
     f"CREATE TEMP TABLE titanic AS (SELECT * FROM read_parquet('{URL_RAW}'))"
 )
+<<<<<<< HEAD
+=======
+=======
+logging.debug(f"\n{80*'-'}\nStarting data validation step\n{80*'-'}")
+
+query_definition = f"CREATE TEMP TABLE titanic AS (SELECT * FROM read_parquet('{URL_RAW}'))"
+>>>>>>> 8bd36a45ab1905aacd0c38f1e862bb2004d0541c
+>>>>>>> 171a9ac41e160413ce1328b935a9e6835c429918
 con.sql(query_definition)
 
 column_names = con.sql("SELECT column_name FROM (DESCRIBE titanic)").to_df()[
@@ -82,7 +113,15 @@ for var in column_names:
 
 # FEATURE ENGINEERING    -----------------------------------------
 
+<<<<<<< HEAD
 logging.debug(f"\n{80 * '-'}\nStarting feature engineering phase\n{80 * '-'}")
+=======
+<<<<<<< HEAD
+logging.debug(f"\n{80 * '-'}\nStarting feature engineering phase\n{80 * '-'}")
+=======
+logging.debug(f"\n{80*'-'}\nStarting feature engineering phase\n{80*'-'}")
+>>>>>>> 8bd36a45ab1905aacd0c38f1e862bb2004d0541c
+>>>>>>> 171a9ac41e160413ce1328b935a9e6835c429918
 
 titanic = con.sql(
     f"SELECT Survived, {', '.join(CATEGORICAL_FEATURES + NUMERIC_FEATURES)} FROM titanic"
@@ -139,17 +178,43 @@ pipe = Pipeline(
 
 # TRAINING AND EVALUATION --------------------------------------------
 
+<<<<<<< HEAD
 logging.debug(f"\n{80 * '-'}\nStarting model fitting phase\n{80 * '-'}")
+=======
+<<<<<<< HEAD
+logging.debug(f"\n{80 * '-'}\nStarting model fitting phase\n{80 * '-'}")
+=======
+logging.debug(f"\n{80*'-'}\nStarting model fitting phase\n{80*'-'}")
+>>>>>>> 8bd36a45ab1905aacd0c38f1e862bb2004d0541c
+>>>>>>> 171a9ac41e160413ce1328b935a9e6835c429918
 
 pipe.fit(X_train, y_train)
 rdmf_score = pipe.score(X_test, y_test)
 rdmf_score_tr = pipe.score(X_train, y_train)
 
+<<<<<<< HEAD
 logging.info(
     f"{rdmf_score:.1%} de bonnes réponses sur les données de test pour validation"
 )
+=======
+<<<<<<< HEAD
+logging.info(
+    f"{rdmf_score:.1%} de bonnes réponses sur les données de test pour validation"
+)
+=======
+logging.info(f"{rdmf_score:.1%} de bonnes réponses sur les données de test pour validation")
+>>>>>>> 8bd36a45ab1905aacd0c38f1e862bb2004d0541c
+>>>>>>> 171a9ac41e160413ce1328b935a9e6835c429918
 
 logging.info("Matrice de confusion:")
 logging.info(confusion_matrix(y_test, pipe.predict(X_test)))
 
+<<<<<<< HEAD
 logging.debug(f"\n{80 * '-'}\nFILE ENDED SUCCESSFULLY!\n{80 * '-'}")
+=======
+<<<<<<< HEAD
+logging.debug(f"\n{80 * '-'}\nFILE ENDED SUCCESSFULLY!\n{80 * '-'}")
+=======
+logging.debug(f"\n{80*'-'}\nFILE ENDED SUCCESSFULLY!\n{80*'-'}")
+>>>>>>> 8bd36a45ab1905aacd0c38f1e862bb2004d0541c
+>>>>>>> 171a9ac41e160413ce1328b935a9e6835c429918
